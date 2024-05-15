@@ -416,6 +416,44 @@ void UART_DisableRxErrors(UART_HandleTypeDef *huart)
 
 /* =========================== General Functions =========================== */
 
+//melody trigger can be found in main "max speed melody"
+//triger max speed melody START
+
+//mariocart_star start
+#define NOTE_C4  26
+#define NOTE_D4  29
+#define NOTE_E4  33
+#define NOTE_F4  35
+#define NOTE_G4  39
+#define NOTE_A4  44
+#define NOTE_B4  49
+#define NOTE_C5  52
+
+uint8_t melody[] = {
+    NOTE_C4, NOTE_D4, NOTE_E4, NOTE_F4, NOTE_G4, NOTE_A4, NOTE_B4, NOTE_C5
+};
+
+int noteDurations[] = {
+    150, 150, 150, 150, 150, 150, 150, 150
+};
+//mariocart_star end
+
+//play melody
+void maxspeedMelody() {
+    int size = sizeof(melody) / sizeof(melody[0]);
+    for (int i = 0; i < size; i++) {
+        buzzerFreq = melody[i];
+        HAL_Delay(noteDurations[i]);
+    }
+    buzzerFreq = 0;  // Turn off the buzzer after the melody
+}
+
+
+//max speed melody END
+
+
+
+
 void poweronMelody(void) {
     buzzerCount = 0;  // prevent interraction with beep counter
     for (int i = 8; i >= 0; i--) {
@@ -742,12 +780,12 @@ void cruiseControl(uint8_t button) {
       rtP_Left.b_cruiseCtrlEna  = 1;
       rtP_Right.b_cruiseCtrlEna = 1;
       cruiseCtrlAcv = 1;
-      beepShortMany(2, 1);                                              // 200 ms beep delay. Acts as a debounce also.
+      maxspeedMelody(2, 1);                                              // 200 ms beep delay. Acts as a debounce also.
     } else if (button && rtP_Left.b_cruiseCtrlEna && !standstillAcv) {  // Cruise control deactivated if no Standstill Hold is active
       rtP_Left.b_cruiseCtrlEna  = 0;
       rtP_Right.b_cruiseCtrlEna = 0;
       cruiseCtrlAcv = 0;
-      beepShortMany(2, -1);
+      maxspeedMelody(2, -1);
     }
   #endif
 }
@@ -1571,7 +1609,7 @@ void poweroffPressCheck(void) {
         if (HAL_GPIO_ReadPin(BUTTON_PORT, BUTTON_PIN)) {  // Double press: Adjust Max Current, Max Speed
           while(HAL_GPIO_ReadPin(BUTTON_PORT, BUTTON_PIN)) { HAL_Delay(10); }
           beepLong(8);
-          updateCurSpdLim();
+      //    updateCurSpdLim();
           beepShort(5);
         } else {                                          // Long press: Calibrate ADC Limits
           #ifdef AUTO_CALIBRATION_ENA

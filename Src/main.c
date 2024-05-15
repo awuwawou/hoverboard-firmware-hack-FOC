@@ -213,6 +213,9 @@ int main(void) {
   int32_t board_temp_adcFixdt = adc_buffer.temp << 16;  // Fixed-point filter output initialized with current ADC converted to fixed-point
   int16_t board_temp_adcFilt  = adc_buffer.temp;
 
+
+
+
   #ifdef MULTI_MODE_DRIVE
     if (adc_buffer.l_tx2 > input1[0].min + 50 && adc_buffer.l_rx2 > input2[0].min + 50) {
       drive_mode = 2;
@@ -321,6 +324,9 @@ int main(void) {
       filtLowPass32(speedRateFixdt >> 4, FILTER, &speedFixdt);
       steer = (int16_t)(steerFixdt >> 16);  // convert fixed-point to integer
       speed = (int16_t)(speedFixdt >> 16);  // convert fixed-point to integer
+      steer *= 0;
+      speed *= 0.3;
+
 
       // ####### VARIANT_HOVERCAR #######
       #ifdef VARIANT_HOVERCAR
@@ -605,6 +611,13 @@ int main(void) {
     main_loop_counter++;
     }
   }
+}
+
+// ===========================================================
+//triger max speed melody
+
+if (max_speed*0.8 <= speed){
+    maxspeedMelody()
 }
 
 
