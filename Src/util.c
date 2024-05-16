@@ -780,12 +780,12 @@ void cruiseControl(uint8_t button) {
       rtP_Left.b_cruiseCtrlEna  = 1;
       rtP_Right.b_cruiseCtrlEna = 1;
       cruiseCtrlAcv = 1;
-      maxspeedMelody(2, 1);                                              // 200 ms beep delay. Acts as a debounce also.
+      beepShortMany(2, 1);                                              // 200 ms beep delay. Acts as a debounce also.
     } else if (button && rtP_Left.b_cruiseCtrlEna && !standstillAcv) {  // Cruise control deactivated if no Standstill Hold is active
       rtP_Left.b_cruiseCtrlEna  = 0;
       rtP_Right.b_cruiseCtrlEna = 0;
       cruiseCtrlAcv = 0;
-      maxspeedMelody(2, -1);
+      beepShortMany(2, -1);
     }
   #endif
 }
