@@ -616,9 +616,9 @@ int main(void) {
 // ===========================================================
 //triger max speed melody
 
-if (max_speed*0.8 <= speed){
-    maxspeedMelody()
-}
+//if (max_speed*0.8 <= speed){
+//    maxspeedMelody()
+//}
 
 
 // ===========================================================
