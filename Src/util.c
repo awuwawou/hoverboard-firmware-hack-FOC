@@ -420,7 +420,7 @@ void UART_DisableRxErrors(UART_HandleTypeDef *huart)
 //triger max speed melody START
 
 //mariocart_star start
-#define NOTE_C4  26
+/*#define NOTE_C4  26
 #define NOTE_D4  29
 #define NOTE_E4  33
 #define NOTE_F4  35
@@ -446,7 +446,7 @@ void maxspeedMelody() {
         HAL_Delay(noteDurations[i]);
     }
     buzzerFreq = 0;  // Turn off the buzzer after the melody
-}
+}*/
 
 
 //max speed melody END
