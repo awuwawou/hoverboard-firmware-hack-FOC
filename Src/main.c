@@ -323,6 +323,12 @@ int main(void) {
       speed = (int16_t)(speedFixdt >> 16);  // convert fixed-point to integer
       speed *= 0.3;
 
+      //triger max speed melody
+
+      if (max_speed*0.8 <= speed){
+          maxspeedMelody()
+      }
+
       // ####### VARIANT_HOVERCAR #######
       #ifdef VARIANT_HOVERCAR
       if (inIdx == CONTROL_ADC) {               // Only use use implementation below if pedals are in use (ADC input)
@@ -606,12 +612,6 @@ int main(void) {
     main_loop_counter++;
     }
   }
-}
-
-//triger max speed melody
-
-if (max_speed*0.8 <= speed){
-    maxspeedMelody()
 }
 
 // ===========================================================
